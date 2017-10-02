@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+
+{% block head_block %}
+
+    <script>
+        $(document).on('change', '#id_Pair', function(){
+            var pair = $( "select#id_Pair option:checked" ).val();
+            // Needs get String
+            var base = pair.substring(0,3);
+            var sub_base = pair.substring(3,6);
+            console.info(base, sub_base);
+
+            var result = 0 ;
+            // Correct url with base as string
+            // Fix a callable Ajax Request to Fixer.io
+            url = 'http://api.fixer.io/latest?base='+base+' &symbols='+sub_base ;
+                $.ajax({
+                  dataType: "json",
+                  url: url,
+                  success: test()
+                });
+
+            // Delete it as it's a demo function
+            function test(){
+                console.log('OK');
+            }
+
+
+            // Print data to another control-label div
+        });
+
+    </script>
+
+{% endblock %}
+
+
+{% block body_block %}
+
+<h1> Calculate Profit/Loss </h1>
+	<div class="jumbotron">
+	<form method="post">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+		    <div class="form-group">
+				{{ field.label_tag }}
+		      	{{ field }}
+		      {% if field.help_text %}
+		        <small class="col-lg-2 control-label">{{ field.help_text }}</small>
+		      {% endif %}
+		    </div>
+	  {% endfor %}
+        <br/>
+	  	<div class="form-group">
+	      <div class="col-lg-10">
+	        <button type="reset" class="btn btn-default">Reset</button>
+	        <button type="submit" class="btn btn-primary" >Calculate</button>
+              <a href="/" class="btn btn-success" >New Calculation</a>
+	      </div>
+	    </div>
+	</form>
+        {% if profit %}
+        <div class="row">
+            <div class="col-lg-4">
+                <button type="button" class="btn btn-success" disabled>Profit {{ profit }} {{ currency }} </button>
+            </div>
+            <div class="col-lg-4">
+                <button type="button" class="btn btn-danger" disabled>Loss {{ loss }} {{ currency }} </button>
+            </div>
+            <div class="col-lg-4">
+                <button type="button" class="btn btn-warning" disabled>Risk {{ profit }} {{ currency }} </button>
+            </div>
+        </div>
+        {% endif %}
+	</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
