@@ -11,5 +11,5 @@ User should complete this form with the below values
 
 and the calculator will extract the expecting **Profit** and the **Loss**.
 
-I wish profitable trading to everyone.
+*Good Luck to everyone.*
 
