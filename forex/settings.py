@@ -26,7 +26,7 @@ SECRET_KEY = 'us-+_wjpi8e6i4)+&#yrb=bd@k#4*d4n65uc=9ndw$qgzhlo4='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['calculateforex.nzmypdups6.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition

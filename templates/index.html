@@ -4,12 +4,33 @@
 {% block head_block %}
 
     <script>
+
+        // If we are using EURUSD pair
+        $(document).ready( function() {
+            var pair = $("select#id_Pair option:checked").val();
+            var base = pair.substring(0, 3);
+            var sub_base = pair.substring(3, 6);
+            var result = 0;
+            // Call a Fixer API GET REQUEST
+            url = 'http://api.fixer.io/latest?base=' + base.toString() + '&symbols=' + sub_base.toString();
+            $.ajax({
+                dataType: "json",
+                url: url,
+                success: function (result) {
+                    rate = result.rates[sub_base];
+                    $('input#current_rate').val(rate);
+                    $('input#id_Entry').val(rate);
+                }
+            });
+        });
+
+        // In each change of the dropdown menu
         $(document).on('change', '#id_Pair', function(){
             var pair = $( "select#id_Pair option:checked" ).val();
             var base = pair.substring(0,3);
             var sub_base = pair.substring(3,6);
             var result = 0 ;
-            // Fix a callable Ajax Request to Fixer.io
+            // Call a Fixer API GET REQUEST
             url = 'http://api.fixer.io/latest?base='+base.toString()+'&symbols='+sub_base.toString() ;
                 $.ajax({
                     dataType: "json",
@@ -20,14 +41,6 @@
                         $('input#id_Entry').val(rate);
                     }
                 });
-
-            // Delete it as it's a demo function
-{#            function test(){#}
-{#                console.log('OK');#}
-{#            }#}
-
-
-            // Print data to another control-label div
         });
 
     </script>
