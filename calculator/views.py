@@ -51,9 +51,9 @@ def index(request):
 
 def calculate_profit_loss(entry, target, stop, lot, position):
 	if position == 'Sell':
-		profit = float(lot) * 10000 *(float(entry) - float(target))
-		loss = float(lot) * 10000 *(float(entry) - float(stop))
+		profit = float(lot) * 100000 *(float(entry) - float(target))
+		loss = float(lot) * 100000 *(float(entry) - float(stop))
 	else :
-		profit = float(lot) * 10000 *(float(target) - float(entry))
-		loss = float(lot) * 10000 *(float(stop) - float(entry))
+		profit = float(lot) * 100000 *(float(target) - float(entry))
+		loss = float(lot) * 100000 *(float(stop) - float(entry))
 	return profit , loss
